@@ -21,8 +21,8 @@ public class LightningBranchController : MonoBehaviour
     [Header("The Juice")]
     public GameObject sparkPrefab;      // Particle system for the hit point
 
-    public float shakeIntensity = 0.2f; // How much the camera shakes
-    public GameObject ghostPrefab;      // Prefab for the 'Retinal Burn'
+    public float shakeIntensity = 0.2f; 
+    public GameObject ghostPrefab;     
     public float microJitter = 0.05f;   // Vibration while the bolt exists
 
     private List<Vector3> _pathPoints = new List<Vector3>();
@@ -52,7 +52,7 @@ public class LightningBranchController : MonoBehaviour
         Vector3 end = _camera.ScreenToWorldPoint(mousePos);
         end.z = 0f;
 
-        // 1. Generate the fractal path
+        // Generate fractal path
         _pathPoints.Clear();
         _pathPoints.Add(start);
         _pathPoints.Add(end);
@@ -68,17 +68,17 @@ public class LightningBranchController : MonoBehaviour
             currentOffset *= roughness;
         }
 
-        // 2. Initial Set
+        
         _lr.positionCount = _pathPoints.Count;
         _lr.SetPositions(_pathPoints.ToArray());
 
 
-        // 3. THE IMPACT JUICE
+        // Impact
         // StartCoroutine(CameraShake(0.1f, shakeIntensity));
         // if (sparkPrefab) Instantiate(sparkPrefab, end, Quaternion.identity);
         SpawnRetinalBurn(_pathPoints); // Creates the lingering after-image
 
-        // 4. Fade & Jitter
+        // Fade 
         float elapsed = 0;
         while (elapsed < fadeDuration)
         {
@@ -89,7 +89,7 @@ public class LightningBranchController : MonoBehaviour
             _lr.startWidth = Mathf.Lerp(strikeWidth, 0, p);
             _lr.endWidth = _lr.startWidth;
 
-            // MICRO-JITTER: Makes the bolt 'vibrate' while it fades
+            // Jitter
             // for (int i = 1; i < _pathPoints.Count - 1; i++)
             // {
             //     Vector3 jitter = Random.insideUnitSphere * microJitter;
@@ -101,8 +101,6 @@ public class LightningBranchController : MonoBehaviour
 
         _lr.enabled = false;
     }
-
-    // --- JUICE METHODS ---
 
     void SpawnRetinalBurn(List<Vector3> points)
     {
@@ -132,7 +130,7 @@ public class LightningBranchController : MonoBehaviour
     {
         Vector3 mid = (a + b) / 2f;
         Vector3 dir = (b - a).normalized;
-        Vector3 perpendicular = new Vector3(-dir.y, dir.x, 0);
+        Vector3 perpendicular = new(-dir.y, dir.x, 0);
         return mid + (perpendicular * Random.Range(-offset, offset));
     }
 }
