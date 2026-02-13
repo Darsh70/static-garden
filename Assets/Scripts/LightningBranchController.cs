@@ -51,13 +51,15 @@ public class LightningBranchController : MonoBehaviour
         Vector3 mousePos = Mouse.current.position.ReadValue();
         Vector3 end = _camera.ScreenToWorldPoint(mousePos);
         end.z = 0f;
-
+    
         // Generate fractal path
         _pathPoints.Clear();
         _pathPoints.Add(start);
         _pathPoints.Add(end);
 
         float currentOffset = initialOffset;
+        
+
         for (int i = 0; i < detailLevels; i++)
         {
             for (int j = 0; j < _pathPoints.Count - 1; j += 2)
@@ -71,6 +73,25 @@ public class LightningBranchController : MonoBehaviour
         
         _lr.positionCount = _pathPoints.Count;
         _lr.SetPositions(_pathPoints.ToArray());
+
+        Collider2D hit = Physics2D.OverlapPoint(end);
+        if (hit != null)
+        {
+            Cell cell = hit.GetComponent<Cell>();
+            if (cell != null)
+            {
+                
+                if (cell.isStruggling || cell.type == CellType.Fungus)
+                {
+                    cell.Purge();
+                    
+                }
+                else if (cell.type == CellType.Plant && !cell.isStruggling)
+                {
+                    // Hitting healthy plant kills it
+                }
+            }
+        }
 
 
         // Impact
