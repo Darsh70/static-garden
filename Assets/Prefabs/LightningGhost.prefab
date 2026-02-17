@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1238109931443616761}
   - component: {fileID: 8329517926033174160}
   - component: {fileID: -2794726046077862169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightningGhost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,14 +92,23 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.009651184
-        value: 0.021390915
+        time: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -150,7 +159,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7042029683886696671}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71598179759494114aa459cec1226e0e, type: 3}
   m_Name: 
